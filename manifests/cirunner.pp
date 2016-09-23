@@ -136,6 +136,10 @@ class gitlab::cirunner (
   }
 
   $runners_hash = hiera($hiera_runners_key, {})
+
+  notice("The value is: ${hiera_runners_key}")
+  notice("The value is: ${runners_hash}")
+
   $runners = keys($runners_hash)
   $default_config = hiera($hiera_default_config_key, {})
   gitlab::runner { $runners:
