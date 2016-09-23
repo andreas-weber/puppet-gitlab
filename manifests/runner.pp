@@ -39,9 +39,13 @@ define gitlab::runner (
   $_config = merge($_default_config, $config)
 
   # Convert configuration into a string
+  notice("DEBUG: ${_config}")
   $parameters_array = join_keys_to_values($_config, ' ')
+  notice("DEBUG: ${parameters_array}")
   $parameters_array_dashes = prefix($parameters_array, '--')
+  notice("DEBUG: ${parameters_array_dashes}")
   $parameters_string = join($parameters_array_dashes, ' ')
+  notice("DEBUG: ${parameters_string}")
 
   $runner_name = $_config['name']
   $toml_file = '/etc/gitlab-runner/config.toml'
@@ -51,5 +55,4 @@ define gitlab::runner (
     command => "/usr/bin/gitlab-ci-multi-runner register -n ${parameters_string}",
     unless  => "/bin/grep ${runner_name} ${toml_file}",
   }
-
 }
