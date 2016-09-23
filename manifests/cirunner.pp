@@ -135,7 +135,7 @@ class gitlab::cirunner (
     require     => Package['gitlab-ci-multi-runner'],
   }
 
-  $runners_hash = hiera($hiera_runners_key, {})
+  $runners_hash = hiera_hash($hiera_runners_key, {})
 
   notice("The value is: ${hiera_runners_key}")
   notice("The value is: ${runners_hash}")
